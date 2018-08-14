@@ -2,8 +2,14 @@ let boxCount = 0
 
 const createBox = (...args) => {
   let html = ''
-  args.forEach(ele => {
-    html += `<div class="flex-item"><div class="item-container" style="background: #${shader()}">${ele}</div></div>`
+  args.forEach((ele, index) => {
+    html += ` 
+      <div class="flex-item" id="data-item-${index}">
+        <div class="item-container" style="background: #${shader()}">
+          <div class="close" data-close-id="${index}"><i class="fas fa-times"></i></div>
+          ${ele}
+        </div>
+      </div>`
   })
   document.querySelector('.flex-container').innerHTML = html
   checkAspectRatio()
@@ -48,6 +54,12 @@ document.querySelector('button').onclick = function(e){
   if(val >= 1 && val <= 9){
     createBox(...Array(val).fill(''))
     document.querySelector('body').removeChild(document.querySelector('.input'))
+    document.querySelectorAll('.close').forEach(ele => {
+      ele.onclick = function(e){
+        document.querySelector('.flex-container').removeChild(document.querySelector(`#data-item-${ele.getAttribute('data-close-id')}`))
+        changeBox(boxCount - 1)
+      }
+    })
     window.onresize = function() {
       checkAspectRatio()
     }

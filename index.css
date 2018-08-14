@@ -14,12 +14,35 @@ body,
 }
 .flex-container > .flex-item{
 	flex-grow: 1;
-	position: relative;
 	box-sizing: border-box;
 	padding: 1px;
 }
 .flex-container > .flex-item .item-container{
+	position: relative;
 	height: 100%;
+}
+.flex-container > .flex-item .item-container .close{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	right: 10px;
+	top: 5px;
+	background: #ff5451;
+	text-align: center;
+	display:none;
+}
+.flex-container > .flex-item .item-container:hover .close{
+	display: block;
+	transition: 300ms;
+}
+.flex-container > .flex-item .item-container:hover .close:hover{
+	transform: rotate(180deg);
+}
+.flex-container > .flex-item .item-container .close i{
+	font-size: 26px;
+	color: #fff;
+	line-height: 40px;
 }
 .flex-container > .flex-item{
 	min-width: 33.33%;
